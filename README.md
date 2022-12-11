@@ -1,12 +1,14 @@
 🚧 Development in progress 🚧
 
-![Translate Inline Demo Video](./docs/demo.gif)
-
 # Translate Inline Tool for Editor.js
 
 This tool allows you to translate text inline to english. 
 
 Requires a translation service. See [Translation Service](#translation-service) for more information.
+
+## Demo
+
+![Translate Inline Demo Video](./docs/demo.gif)
 
 ## Features
 
