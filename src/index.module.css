@@ -1,0 +1,25 @@
+.rotate-cw {
+  animation: rotate-cw 0.3s ease-in infinite;
+}
+
+.rotate-ccw {
+  animation: rotate-ccw 0.2s ease-out;
+}
+
+@keyframes rotate-cw {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-ccw {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
