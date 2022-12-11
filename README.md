@@ -1,6 +1,6 @@
 🚧 Development in progress 🚧
 
-![Translate Inline Demo Video](./docs/demo.mp4)
+![Translate Inline Demo Video](./docs/demo.gif)
 
 # Translate Inline Tool for Editor.js
 
