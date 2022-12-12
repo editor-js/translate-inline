@@ -3,7 +3,7 @@
 }
 
 .rotate-ccw {
-  animation: rotate-ccw 0.2s ease-out;
+  animation: rotate-ccw 0.15s ease-out;
 }
 
 @keyframes rotate-cw {

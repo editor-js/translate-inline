@@ -74,10 +74,9 @@ export default class Translate implements InlineTool {
     this.nodes.wrapper = document.createElement('button');
     this.nodes.wrapper.classList.add(this.api.styles.inlineToolButton);
     this.nodes.wrapper.type = 'button';
+    this.nodes.wrapper.innerHTML = IconTranslate;
 
-    this.nodes.buttonTranslate = document.createElement('span');
-    this.nodes.buttonTranslate.innerHTML = IconTranslate;
-    this.nodes.wrapper.appendChild(this.nodes.buttonTranslate);
+    this.nodes.buttonTranslate = this.nodes.wrapper.firstChild as HTMLElement;
 
     return this.nodes.wrapper;
   }
