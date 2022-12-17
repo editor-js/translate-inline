@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "main": "dist/Translate.umd.js",
   "module": "dist/Translate.mjs",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
