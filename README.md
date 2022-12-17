@@ -6,8 +6,6 @@ This tool allows you to translate text inline to english.
 
 Requires a translation service. See [Translation Service](#translation-service) for more information.
 
-## Demo
-
 ![Translate Inline Demo Video](./docs/demo.gif)
 
 ## Features
@@ -35,9 +33,9 @@ Use the [docker-compose.yml](./server/docker-compose.yml) to build and run the t
 Use your package manager to install the package `editorjs-translate-inline`.
 
 ```
-npm install editorjs-translate-inline
+npm install -D @editorjs/translate-inline
 
-yarn add editorjs-translate-inline
+yarn add -D @editorjs/translate-inline
 ```
 
 Add the Tool to your Editor.js configuration and provide the endpoint of the translation service.
