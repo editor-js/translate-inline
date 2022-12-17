@@ -6,7 +6,7 @@ import styles from './index.module.css';
 /**
  * Import icons
  */
-import { IconTranslate, IconUndo } from '@codexteam/icons';
+import { IconTranslate } from '@codexteam/icons';
 
 /**
  * Import types
