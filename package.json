@@ -1,5 +1,5 @@
 {
-  "name": "editorjs-translate-inline",
+  "name": "@editorjs/translate-inline",
   "description": "Translate Inline Tool for Editor.js",
   "version": "1.0.0",
   "main": "dist/Translate.umd.js",
