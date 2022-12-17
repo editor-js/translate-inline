@@ -1,12 +1,10 @@
-🚧 Development in progress 🚧
-
 # Translate Inline Tool for Editor.js
 
 This tool allows you to translate text inline to english. 
 
 Requires a translation service. See [Translation Service](#translation-service) for more information.
 
-![Translate Inline Demo Video](./docs/demo.gif)
+![Translate Inline Demo Video](./assets/demo.gif)
 
 ## Features
 
@@ -28,7 +26,7 @@ This server example uses the [googletrans](https://github.com/ssut/py-googletran
 
 Use the [docker-compose.yml](./server/docker-compose.yml) to build and run the translation service.
 
-### Tool itself
+### Usage
 
 Use your package manager to install the package `editorjs-translate-inline`.
 
@@ -38,19 +36,23 @@ npm install -D @editorjs/translate-inline
 yarn add -D @editorjs/translate-inline
 ```
 
-Add the Tool to your Editor.js configuration and provide the endpoint of the translation service.
+Import and add the Tool to your Editor.js configuration and provide the endpoint of the translation service.
 
 ```
-tools: {
-  // ...
+import Translate from '@editorjs/translate-inline';
 
-  translator: {
-    class: translator,
-    config: {
-      endpoint: 'http://localhost:5000/translate?text=',
-    }
+const editor = new EditorJS({
+  tools: {
+    translator: {
+      class: Translate,
+      config: {
+        endpoint: 'http://localhost:5000/translate?text=',
+      }
+    },
   },
-},
+
+  // ...
+});
 ```
 
 ## Development
