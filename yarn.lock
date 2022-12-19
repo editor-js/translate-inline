@@ -2,22 +2,17 @@
 # yarn lockfile v1
 
 
-"@codexteam/icons@^0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@codexteam/icons/-/icons-0.0.4.tgz#8b72dcd3f3a1b0d880bdceb2abebd74b46d3ae13"
-  integrity sha512-V8N/TY2TGyas4wLrPIFq7bcow68b3gu8DfDt1+rrHPtXxcexadKauRJL6eQgfG7Z0LCrN4boLRawR4S9gjIh/Q==
+"@codexteam/icons@0.1.0", "@codexteam/icons@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@codexteam/icons/-/icons-0.1.0.tgz#a02885fe8699f69902d05b077b5f1cd48a2ca6b9"
+  integrity sha512-jW1fWnwtWzcP4FBGsaodbJY3s1ZaRU+IJy1pvJ7ygNQxkQinybJcwXoyt0a5mWwu/4w30A42EWhCrZn8lp4fdw==
 
-"@codexteam/icons@^0.0.8":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@codexteam/icons/-/icons-0.0.8.tgz#25bc8ba083b179b958b0e133d3ee5c2475b02343"
-  integrity sha512-toTLbLPbrDFl2ZK2mtDC+P7sdrJaqOK6URsjFy6m54Pry8q4ckKeKJ1fOEwVcSGKiwdRhrRO3ZzSbL16DaIBJA==
-
-"@editorjs/editorjs@^2.26.2":
-  version "2.26.2"
-  resolved "https://registry.yarnpkg.com/@editorjs/editorjs/-/editorjs-2.26.2.tgz#21e51d4c41f1943d580a34b82a78494a019b4d51"
-  integrity sha512-7oKPWG/Oc6RF0AN1VccuBZMoQ4g/YoAfJvmo2RGjmmMpPT3sPC8a6X4XYetfYbjHfSyJ5E3pARRn9DzJQ6SHcg==
+"@editorjs/editorjs@^2.26.4":
+  version "2.26.4"
+  resolved "https://registry.yarnpkg.com/@editorjs/editorjs/-/editorjs-2.26.4.tgz#097e29341501d81cd1721604a74da1530f5ff74f"
+  integrity sha512-yuJ2NM1Y5+8DDNWr4C00tHMVHKy0uCqK1HS4pwFPVcXUawgJnU2Li2vKGvPLuf0Jj2ir7MVgADO6oC1TbYBOYQ==
   dependencies:
-    "@codexteam/icons" "^0.0.4"
+    "@codexteam/icons" "0.1.0"
     codex-notifier "^1.1.2"
     codex-tooltip "^1.0.5"
     html-janitor "^2.0.4"

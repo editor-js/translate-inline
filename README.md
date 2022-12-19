@@ -26,6 +26,10 @@ This server example uses the [googletrans](https://github.com/ssut/py-googletran
 
 Use the [docker-compose.yml](./server/docker-compose.yml) to build and run the translation service.
 
+By default the service runs on port 5000.
+
+CORS are enabled.
+
 ### Usage
 
 Use your package manager to install the package `editorjs-translate-inline`.

@@ -36,9 +36,9 @@ export default class Translate implements InlineTool {
   private nodes: {[key: string]: HTMLElement | null};
 
   /**
-   * Tool's state
+   * Saved text before translation to implement 'revert' feature
    */ 
-  private originalText: string;
+  private originalText: string = '';
 
   /**
    * Class constructor
@@ -47,7 +47,6 @@ export default class Translate implements InlineTool {
    */
   constructor({ config, api }: { config: TranslateConfig, api: API }) {
     this.config = config;  
-
     this.api = api;
 
     /**
@@ -57,64 +56,95 @@ export default class Translate implements InlineTool {
       wrapper: null,
       buttonTranslate: null,
     };
-
-    this.originalText = '';
   }
 
-
+  /**
+   * Inline Tool flag
+   */ 
   static get isInline() {
     return true;
   }
 
+  /**
+   * Tool's title
+   */
   static get title() {
     return 'Translate';
   }
 
-  render() {
+  /**
+   * Tool's button with icon
+   */ 
+  render(): HTMLElement {
     this.nodes.wrapper = document.createElement('button');
     this.nodes.wrapper.classList.add(this.api.styles.inlineToolButton);
     this.nodes.wrapper.type = 'button';
     this.nodes.wrapper.innerHTML = IconTranslate;
 
+    /**
+     * Save button to the nodes list
+     * We exactly know that this button has a SVG child element
+     */
     this.nodes.buttonTranslate = this.nodes.wrapper.firstChild as HTMLElement;
 
     return this.nodes.wrapper;
   }
 
-  async surround(range: Range) {
+  /**
+   * Processing selected text
+   */
+  async surround(range: Range): Promise<void> {
     /**
      * Apply 'revert' feature if button was clicked again after translation
      */
     if (this.originalText) {
       this.toggleAnimatedButton('ccw');
-      range.deleteContents();
-      range.insertNode(document.createTextNode(this.originalText));
 
+      this.replaceText(range, this.originalText);
+
+      /**
+       * Wait for animation to complete as UX improvement
+       */
       setTimeout(() => {
         this.toggleAnimatedButton('ccw', false);
       }, 300);
 
+      /**
+       * Restore selection
+       */
       this.select(range);
 
       this.originalText = '';
+
       return;
     }
 
+    /**
+     * Get selected text
+     */
     const inputText = range.toString();
 
     if (!inputText) return;
 
+    /**
+     * Translation process
+     */
     this.toggleAnimatedButton('cw');
     const translatedText = await this.translate(inputText);
     this.toggleAnimatedButton('cw', false);
 
     if (!translatedText) return;
 
+    /**
+     * Save original text to implement 'revert' feature
+     */ 
     this.originalText = inputText;
 
-    range.deleteContents();
-    range.insertNode(document.createTextNode(translatedText));
+    this.replaceText(range, translatedText);
 
+    /**
+     * Restore selection
+     */ 
     this.select(range);
   }
 
@@ -125,6 +155,9 @@ export default class Translate implements InlineTool {
     return false;
   }
 
+  /**
+   * Restore selection method
+   */
   select(range: Range) {
     const sel = window.getSelection();
     
@@ -135,9 +168,17 @@ export default class Translate implements InlineTool {
   }
 
   /**
+   * Replace text in the selection
+   */
+  private replaceText(range: Range, text: string): void {
+    range.deleteContents();
+    range.insertNode(document.createTextNode(text));
+  }
+
+  /**
    * Translate text 
    */
-  private async translate(text: string) {
+  private async translate(text: string): Promise<string | undefined> {
     /**
      * Do not send empty strings to the server
      */
@@ -188,7 +229,13 @@ export default class Translate implements InlineTool {
     }
   }
 
-  private toggleAnimatedButton(direction: 'cw'|'ccw', flag = true) {
+  /**
+   * Toggle animation for the button
+   * 
+   * @param direction — 'cw' or 'ccw'
+   * @param flag — true to add class, false to remove
+   */
+  private toggleAnimatedButton(direction: 'cw'|'ccw', flag = true): void {
     if (!this.nodes.buttonTranslate) return;
 
     this.nodes.buttonTranslate.classList.toggle(styles[`rotate-${direction}`], flag);
