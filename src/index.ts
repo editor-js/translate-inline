@@ -12,7 +12,7 @@ import { IconTranslate } from '@codexteam/icons';
  * Import types
  */
 import { TranslateConfig } from './types';
-import { API, BlockAPI, InlineTool } from '@editorjs/editorjs';
+import { API, InlineTool } from '@editorjs/editorjs';
 
 /**
  * Translate Tool for Editor.js
