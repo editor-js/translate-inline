@@ -1,7 +1,7 @@
 {
   "name": "@editorjs/translate-inline",
   "description": "Translate Inline Tool for Editor.js",
-  "version": "1.0.0-rc.0",
+  "version": "1.0.0-rc.1",
   "main": "dist/Translate.umd.js",
   "module": "dist/Translate.mjs",
   "license": "MIT",
