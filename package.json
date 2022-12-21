@@ -10,7 +10,7 @@
     "build": "vite build"
   },
   "devDependencies": {
-    "@codexteam/icons": "https://github.com/codex-team/icons#loader",
+    "@codexteam/icons": "^0.2.0",
     "@editorjs/editorjs": "^2.26.4",
     "@types/node": "^16.3.3",
     "vite": "^3.1.0",
