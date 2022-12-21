@@ -12,7 +12,7 @@ Works in any block. just select the text and click the Translate button in the t
 
 Source language is detected automatically.
 
-Example docker container for the translation service is provided.
+Example of the translation service server is provided.
 
 `Soon` Choosing the target language to translate.
 
@@ -22,19 +22,21 @@ Example docker container for the translation service is provided.
 
 ### Translation Service
 
-This server example uses the [googletrans](https://github.com/ssut/py-googletrans) python package to translate text. Don't use it in production, it's just an example.
+Features of the example translation service:
 
-Use the [docker-compose.yml](./server/docker-compose.yml) to build and run the translation service.
+- uses the [googletrans](https://github.com/ssut/py-googletrans) python package to translate text;
+- runs on port 5000;
+- CORS are enabled for all origins.
 
-By default the service runs on port 5000.
+You can run the server locally via [venv](#via-venv) or [docker](#via-docker). On the production you can use  
 
-CORS are enabled.
+For the production environment you should use a different translation service cause the `googletrans` package is not meant for production use. But you can use the example server as a starting point.
 
 ### Usage
 
 Use your package manager to install the package `editorjs-translate-inline`.
 
-```
+```shell
 npm install -D @editorjs/translate-inline
 
 yarn add -D @editorjs/translate-inline
@@ -42,7 +44,7 @@ yarn add -D @editorjs/translate-inline
 
 Import and add the Tool to your Editor.js configuration and provide the endpoint of the translation service.
 
-```
+```javascript
 import Translate from '@editorjs/translate-inline';
 
 const editor = new EditorJS({
@@ -61,18 +63,48 @@ const editor = new EditorJS({
 
 ## Development
 
-Run translation server:
-
-```
-cd server
-docker-compose up
-```
-
-Run package builder:
+### Run package builder
 
 `npm run dev` / `yarn dev` — run development environment with hot reload
 
 `npm run build` / `yarn build` — build the tool for production to the `dist` folder
+
+### Run translation server
+
+### Via venv
+
+Use venv to create a virtual environment and activate it.
+
+```shell
+cd server
+python3 -m venv venv
+source venv/bin/activate
+```
+
+Install the requirements and run the server.
+
+```shell
+python -m pip install -r requirements.txt
+python main.py
+```
+
+Deactivate the virtual environment when you're done.
+
+```shell
+deactivate
+```
+
+### Via docker
+
+Build the docker image and run the container.
+
+```shell
+cd server
+docker build -t editorjs-translate-inline .
+docker run -p 5000:5000 editorjs-translate-inline
+```
+
+To rebuild the image after changes run `docker build --no-cache -t editorjs-translate-inline .`
 
 ## Links
 
