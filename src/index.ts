@@ -6,7 +6,7 @@ import styles from './index.module.css';
 /**
  * Import icons
  */
-import { IconTranslate } from '@codexteam/icons';
+import { IconTranslate, IconLoader } from '@codexteam/icons';
 
 /**
  * Import types
@@ -54,7 +54,8 @@ export default class Translate implements InlineTool {
      */
     this.nodes = {
       wrapper: null,
-      buttonTranslate: null,
+      translateIcon: null,
+      loader: null,
     };
   }
 
@@ -79,13 +80,13 @@ export default class Translate implements InlineTool {
     this.nodes.wrapper = document.createElement('button');
     this.nodes.wrapper.classList.add(this.api.styles.inlineToolButton);
     this.nodes.wrapper.type = 'button';
-    this.nodes.wrapper.innerHTML = IconTranslate;
 
-    /**
-     * Save button to the nodes list
-     * We exactly know that this button has a SVG child element
-     */
-    this.nodes.buttonTranslate = this.nodes.wrapper.firstChild as HTMLElement;
+    this.nodes.translateIcon = this.getElementFromHTML(IconTranslate);
+    this.nodes.wrapper.appendChild(this.nodes.translateIcon);
+
+    this.nodes.loader = this.getElementFromHTML(IconLoader);
+    this.nodes.loader.classList.add(styles.hidden);
+    this.nodes.wrapper.appendChild(this.nodes.loader);
 
     return this.nodes.wrapper;
   }
@@ -98,7 +99,7 @@ export default class Translate implements InlineTool {
      * Apply 'revert' feature if button was clicked again after translation
      */
     if (this.originalText) {
-      this.toggleAnimatedButton('ccw');
+      this.toggleLoader();
 
       this.replaceText(range, this.originalText);
 
@@ -106,7 +107,7 @@ export default class Translate implements InlineTool {
        * Wait for animation to complete as UX improvement
        */
       setTimeout(() => {
-        this.toggleAnimatedButton('ccw', false);
+        this.toggleLoader(false);
       }, 300);
 
       /**
@@ -129,9 +130,9 @@ export default class Translate implements InlineTool {
     /**
      * Translation process
      */
-    this.toggleAnimatedButton('cw');
+    this.toggleLoader();
     const translatedText = await this.translate(inputText);
-    this.toggleAnimatedButton('cw', false);
+    this.toggleLoader(false);
 
     if (!translatedText) return;
 
@@ -230,14 +231,35 @@ export default class Translate implements InlineTool {
   }
 
   /**
-   * Toggle animation for the button
+   * Toggle loader element on the button
    * 
-   * @param direction — 'cw' or 'ccw'
    * @param flag — true to add class, false to remove
    */
-  private toggleAnimatedButton(direction: 'cw'|'ccw', flag = true): void {
-    if (!this.nodes.buttonTranslate) return;
+  private toggleLoader(flag = true): void {
+    if (!this.nodes.translateIcon) {
+      console.error('[Translate] button is not found');
+      return;
+    }
 
-    this.nodes.buttonTranslate.classList.toggle(styles[`rotate-${direction}`], flag);
+    if (!this.nodes.loader) {
+      console.error('Loader is not found');
+      return;
+    };
+
+    this.nodes.translateIcon.classList.toggle(styles.hidden, flag);
+    this.nodes.loader.classList.toggle(styles.hidden, !flag);
+  }
+
+  /**
+   * Create HTML element from string
+   * 
+   * @param html — HTML string
+   */
+  private getElementFromHTML(html: string): HTMLElement {
+    const template = document.createElement('template');
+   
+    template.innerHTML = html.trim();
+   
+    return template.content.firstChild as HTMLElement;
   }
 };
