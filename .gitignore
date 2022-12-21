@@ -3,3 +3,4 @@ server/venv
 .DS_Store
 node_modules
 *.log
+dist
